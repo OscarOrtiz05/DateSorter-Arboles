@@ -62,11 +62,15 @@ int main() {
         heapOrdenes.currentSize++;
     }
 
+    ofstream FileOrdenes("restaurantes_top_ordenes.txt");
     heapOrdenes.reacomodarPorOrdenes();
     for (int i = 0; i < 10; i++) {
         Restaurante aux = heapOrdenes.popOrden();
         cout << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
+        FileOrdenes << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
     }
+    FileOrdenes.close();
+
     cout << "\n";
 
     //Crea nuevo Heap con los valores de restaurante
@@ -76,12 +80,14 @@ int main() {
         heapIngresos.currentSize++;
     }
 
+    ofstream FileIngresos("restaurantes_top_ingresos.txt");
     heapIngresos.reacomodarPorIngresos();
     for (int i = 0; i < 10; i++) {
         Restaurante aux = heapIngresos.popIngreso();
         cout << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
+        FileIngresos << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
     }
-
+    FileIngresos.close();
 
     return 0;
 }
