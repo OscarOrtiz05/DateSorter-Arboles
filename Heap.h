@@ -145,7 +145,7 @@ void Heap::push( string value, int n )
     }
 }
 
-//	intercanbia los valores de dos posiciones a y b
+//intercambia los valores de dos posiciones a y b
 //Complejidad O(1)
 void Heap::swap( int a, int b )
 {	Restaurante aux = data[a];
@@ -158,7 +158,7 @@ void Heap::swap( int a, int b )
 int Heap::search( string value ) {
     //Itera sobre toda la lista hasta encontrar el valor
     for (int i = 0; i < currentSize; i++) {
-        //Regresa el índice si encuntra el valor
+        //Regresa el índice si encuentra el valor
         //Busca por nombre
         if (data[i].nombre == value) return i;
     }
@@ -166,34 +166,43 @@ int Heap::search( string value ) {
     return -1;
 }
 
-
+//Hace heapify al heap basandose en totalOrdenes
+//Complejidad O(log n)
 void Heap::heapifyOrden( int index ) {
+    //Obtiene los índices de los hijos
     int L = left(index), R = right(index), i = index;
 
+    //Encuentra el mayor de los tres valores
     if (L < currentSize && data[L].totalOrdenes > data[i].totalOrdenes) i=L;
-
     if (R < currentSize && data[R].totalOrdenes > data[i].totalOrdenes) i=R;
 
+    //Verifica si el mayor es uno de los hijos
     if (i != index) {
+        //Intercambia los valores y vuelva a llamar a la función
         swap(index, i);
         heapifyOrden(i);
     }
 }
 
+//Reacomoda el Heap a un Max-Heap por total de órdenes
+//Complejidad O(n)
 void Heap::reacomodarPorOrdenes() {
+    //Llama al heapifyOrden empezando por el último nodo con hijos
     for (int i = currentSize / 2 - 1; i >= 0; i--) {
         heapifyOrden(i);
     }
 }
 
+//Libera los valores del Heap manteniendo un Max-Heap de órdenes
+//Compleajidad O(log n)
 Restaurante Heap::popOrden() {
     if (!isEmpty()) {
-        //Remplaza el primer valor por el ultimo y decrementa el tamaño
+        //Remplaza el primer valor por el último y decrementa el tamaño
         Restaurante aux = data[0];
         data[0] = data[currentSize-1];
         currentSize--;
 
-        //Reacomoda la pila
+        //Reacomoda el heap manteniendo un Max-Heap de órdenes
         heapifyOrden(0);
 
         //Regresa el valor eliminado
@@ -205,33 +214,42 @@ Restaurante Heap::popOrden() {
     return Restaurante();
 }
 
+//Hace heapify al heap basandose en totalOrdenes
+//Complejidad O(log n)
 void Heap::heapifyIngreso(int index) {
+    //Obtiene los índices de los hijos
     int L = left(index), R = right(index), i = index;
 
+    //Encuentra el mayor de los tres valores
     if (L < currentSize && data[L].totalIngreso > data[i].totalIngreso) i=L;
-
     if (R < currentSize && data[R].totalIngreso > data[i].totalIngreso) i=R;
 
+    //Verifica si el mayor es uno de los hijos
     if (i != index) {
+        //Intercambia los valores y vuelva a llamar a la función
         swap(index, i);
         heapifyIngreso(i);
     }
 }
 
+//Reacomoda el Heap a un Max-Heap por total de ingresos
+//Complejidad O(n)
 void Heap::reacomodarPorIngresos() {
+    //Llama al heapifyIngreso empezando por el último nodo con hijos
     for (int i = currentSize / 2 - 1; i >= 0; i--) {
         heapifyIngreso(i);
     }
 }
-
+//Libera los valores del Heap manteniendo un Max-Heap de ingresos
+//Complejidad O(log n)
 Restaurante Heap::popIngreso() {
     if (!isEmpty()) {
-        //Remplaza el primer valor por el ultimo y decrementa el tamaño
+        //Remplaza el primer valor por el último y decrementa el tamaño
         Restaurante aux = data[0];
         data[0] = data[currentSize-1];
         currentSize--;
 
-        //Reacomoda la pila
+        //Reacomoda el heap manteniendo un Max-Heap de ingresos
         heapifyIngreso(0);
 
         //Regresa el valor eliminado

@@ -1,6 +1,8 @@
 #include "Heap.h"
 #include <fstream>
 
+//Función que lee un archivo de texto y crea un heap con eso
+//Complejidad O(n^2)
 void loadOrderData(const string& filename, Heap& out, int capacity) {
     int i = 0;
     string rest,sline,m,r,nm,n,d,h,min,s;
@@ -34,10 +36,14 @@ void loadOrderData(const string& filename, Heap& out, int capacity) {
             index = line.find(")");
             n = line.substr(0, index);
 
-            if (int index = out.search(r); index != -1) {
-                out.data[index].totalOrdenes++;
-                out.data[index].totalIngreso += stoi(n);
+            //Busca el valor en el Heap
+            if (int indexHeap = out.search(r); indexHeap != -1) {//Si lo encuentra
+                //Suma uno al total de órdenes
+                out.data[indexHeap].totalOrdenes++;
+                //Suma al total de ingresos
+                out.data[indexHeap].totalIngreso += stoi(n);
             }else {
+                //Agrega el valor al heap si no lo encuentra
                 out.push(r,stoi(n));
             }
 
@@ -50,9 +56,11 @@ void loadOrderData(const string& filename, Heap& out, int capacity) {
 }
 
 int main() {
+    //Declara el heap y el tamaño de este
     int capacity = 10000;
     Heap restaurantes = Heap(capacity);
 
+    //Lee los datos del archivo y construye el heap
     loadOrderData("orders.txt", restaurantes, capacity);
 
     //Crea nuevo Heap con los valores de restaurante
