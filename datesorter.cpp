@@ -38,7 +38,7 @@ void loadOrderData(const string& filename, Heap& out, int capacity) {
                 out.data[index].totalOrdenes++;
                 out.data[index].totalIngreso += stoi(n);
             }else {
-                out.push(r);
+                out.push(r,stoi(n));
             }
 
             i++;

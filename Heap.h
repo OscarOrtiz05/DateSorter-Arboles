@@ -10,24 +10,25 @@
 
 using namespace std;
 
-
-
+//Clase Restaurante para guardar los valores de los restaurantes
 class Restaurante {
 public:
-    string nombre;
-    int totalOrdenes;
-    int totalIngreso;
+    string nombre; //Nombre del restaurante
+    int totalOrdenes; //Número total de órdenes
+    int totalIngreso; //Ingreso total
 
+    //Constructor default
     Restaurante() {
         nombre = "";
         totalOrdenes = 0;
         totalIngreso = 0;
     }
 
-    Restaurante(string _nombre) {
+    //Constructor por nombre
+    Restaurante(string _nombre, int ingreso) {
         nombre = _nombre;
-        totalOrdenes = 1;
-        totalIngreso = 0;
+        totalOrdenes = 1;//Se inicializa en 1 porque es la primer orden que se registra
+        totalIngreso = ingreso;
     };
 
 };
@@ -61,7 +62,7 @@ class Heap
     int left(int);
     int right(int);
 
-    void push(string);
+    void push(string,int);
     Restaurante pop();
     void heapifyNombre(int);
     void swap(int, int);
@@ -102,7 +103,7 @@ int Heap::right( int j)
 {	int r = 2*j + 2;
     return r; 	}
 
-void Heap::push( string value )
+void Heap::push( string value, int n )
 {   if (!this->isFull())
     {   int j =  currentSize;
         int p = parent(j);
@@ -115,7 +116,7 @@ void Heap::push( string value )
             p = parent(j);
         }
 
-        data[j] = Restaurante(value);
+        data[j] = Restaurante(value, n);
         currentSize++;
 
     }else {
