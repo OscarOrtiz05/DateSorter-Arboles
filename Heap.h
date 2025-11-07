@@ -29,7 +29,7 @@ public:
         nombre = _nombre;
         totalOrdenes = 1;//Se inicializa en 1 porque es la primer orden que se registra
         totalIngreso = ingreso;
-    };
+    }
 
 };
 
@@ -139,12 +139,10 @@ void Heap::push( string value, int n )
         //Inserta el nuevo valor
         data[j] = Restaurante(value, n);
         currentSize++;
-
     }else {
         //Avisa cunando el Heap está lleno
         cout << "Heap lleno" << endl;
     }
-
 }
 
 //	intercanbia los valores de dos posiciones a y b
@@ -155,13 +153,19 @@ void Heap::swap( int a, int b )
     data[b] = aux;
 }
 
+//Busca un valor en el Heap por nombre del Restaurante
+//Complejidad O(n)
 int Heap::search( string value ) {
+    //Itera sobre toda la lista hasta encontrar el valor
     for (int i = 0; i < currentSize; i++) {
+        //Regresa el índice si encuntra el valor
+        //Busca por nombre
         if (data[i].nombre == value) return i;
     }
+    //Regresa -1 si no los encuentra
     return -1;
-
 }
+
 
 void Heap::heapifyOrden( int index ) {
     int L = left(index), R = right(index), i = index;
