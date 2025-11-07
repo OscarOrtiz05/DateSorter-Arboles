@@ -70,13 +70,22 @@ int main() {
         heapOrdenes.currentSize++;
     }
 
+    //Abre un nuevo archivo
     ofstream FileOrdenes("restaurantes_top_ordenes.txt");
+    //Reacomoda el nuevo heap para convertirlo en un Max-Heap de órdenes
     heapOrdenes.reacomodarPorOrdenes();
+    //Hace pop 10 veces, por lo tanto,
+    //muestra los 10 restaurantes con la mayor cantidad de órdenes
+    cout << "10 restaurantes con la mayor cantidad de ordenes\n";
+    FileOrdenes << "10 restaurantes con la mayor cantidad de ordenes\n";
     for (int i = 0; i < 10; i++) {
         Restaurante aux = heapOrdenes.popOrden();
+        //Despliega la información
         cout << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
+        //Guarda la información al archivo de texto
         FileOrdenes << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
     }
+    //Cierra el archivo
     FileOrdenes.close();
 
     cout << "\n";
@@ -88,13 +97,20 @@ int main() {
         heapIngresos.currentSize++;
     }
 
+    //Abre un nuevo archivo
     ofstream FileIngresos("restaurantes_top_ingresos.txt");
+    //Reacomoda el nuevo heap para convertirlo en un Max-Heap de ingresos
     heapIngresos.reacomodarPorIngresos();
+    //Hace pop 10 veces, por lo tanto,
+    //muestra los 10 restaurantes con la mayor cantidad de ingresos
     for (int i = 0; i < 10; i++) {
         Restaurante aux = heapIngresos.popIngreso();
+        //Despliega la información
         cout << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
+        //Guarda la información en el archivo de texto
         FileIngresos << aux.nombre << " (Ordenes: " << aux.totalOrdenes << ", Ingresos: " << aux.totalIngreso <<")\n";
     }
+    //Cierra el archivo
     FileIngresos.close();
 
     return 0;

@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(datsortercpp_arboles datesorter.cpp
         Heap.h
+        completo.cpp
 )
